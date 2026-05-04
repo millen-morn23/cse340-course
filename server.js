@@ -15,6 +15,12 @@ app.set('views', './views');
 // Static files
 app.use(express.static('public'));
 
+// ✅ Dynamic year middleware (server-side)
+app.use((req, res, next) => {
+  res.locals.year = new Date().getFullYear();
+  next();
+});
+
 // Routes
 app.get('/', (req, res) => {
   res.render('home', { title: 'Home' });
