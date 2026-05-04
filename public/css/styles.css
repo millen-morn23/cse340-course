@@ -89,6 +89,10 @@ footer {
   margin-top: 60px;
 }
 
+footer p {
+  color: #ff947a;
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   .nav-container {
