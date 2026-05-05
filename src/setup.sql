@@ -5,14 +5,15 @@ CREATE TABLE organizations (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100),
   description TEXT,
-  image VARCHAR(255)
+  image VARCHAR(255),
+  contact_email VARCHAR(100)
 );
 
-INSERT INTO organizations (name, description, image)
+INSERT INTO organizations (name, description, image, contact_email)
 VALUES
-('Red Cross', 'Emergency assistance and disaster relief.', '/images/redcross.jpg'),
-('UNICEF', 'Children welfare and support.', '/images/unicef.jpg'),
-('WWF', 'Environmental conservation.', '/images/wwf.jpg');
+('Red Cross', 'Emergency assistance and disaster relief.', '/images/redcross.jpg', 'contact@redcross.org'),
+('UNICEF', 'Children welfare and support.', '/images/unicef.jpg', 'info@unicef.org'),
+('WWF', 'Environmental conservation.', '/images/wwf.jpg', 'support@wwf.org');
 
 
 -- =========================
