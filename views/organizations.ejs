@@ -4,23 +4,14 @@
 
 <div class="org-container">
 
-  <div class="org-card">
-    <img src="/images/sample.jpg" alt="Red Cross" width="300">
-    <h2>Red Cross</h2>
-    <p>Provides emergency assistance and disaster relief to those in need.</p>
-  </div>
-
-  <div class="org-card">
-    <img src="/images/unicef.jpg" alt="UNICEF" width="300">
-    <h2>UNICEF</h2>
-    <p>Supports children's rights, education, and healthcare worldwide.</p>
-  </div>
-
-  <div class="org-card">
-    <img src="/images/wwf.jpg" alt="WWF" width="300">
-    <h2>WWF</h2>
-    <p>Works to conserve nature and reduce threats to the environment.</p>
-  </div>
+  <% organizations.forEach(org => { %>
+    <div class="org-card">
+      <img src="<%= org.image %>" alt="<%= org.name %>" width="300">
+      <h2><%= org.name %></h2>
+      <p><%= org.description %></p>
+      <p>Email: <%= org.contact_email %></p>
+    </div>
+  <% }) %>
 
 </div>
 

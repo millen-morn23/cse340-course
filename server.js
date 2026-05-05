@@ -2,6 +2,7 @@ import express from 'express';
 import pool from './db/connection.js';
 import { getAllProjects } from './models/projects.js';
 import { getAllCategories } from './models/categories.js';
+import { getAllOrganizations } from './models/organizations.js'; // ✅ ADDED
 
 // Test database connection (temporary)
 pool.query('SELECT NOW()')
@@ -38,26 +39,49 @@ app.get('/', (req, res) => {
   res.render('home', { title: 'Home' });
 });
 
-app.get('/organizations', (req, res) => {
-  res.render('organizations', { title: 'Organizations' });
+// ✅ FIXED ORGANIZATIONS ROUTE
+app.get('/organizations', async (req, res) => {
+  try {
+    const organizations = await getAllOrganizations();
+
+    res.render('organizations', {
+      title: 'Organizations',
+      organizations
+    });
+  } catch (error) {
+    console.error('Error loading organizations:', error);
+    res.status(500).send('Server Error');
+  }
 });
 
+// Projects
 app.get('/projects', async (req, res) => {
-  const projects = await getAllProjects();
+  try {
+    const projects = await getAllProjects();
 
-  res.render('projects', {
-    title: 'Projects',
-    projects
-  });
+    res.render('projects', {
+      title: 'Projects',
+      projects
+    });
+  } catch (error) {
+    console.error('Error loading projects:', error);
+    res.status(500).send('Server Error');
+  }
 });
 
+// Categories
 app.get('/categories', async (req, res) => {
-  const categories = await getAllCategories();
+  try {
+    const categories = await getAllCategories();
 
-  res.render('categories', {
-    title: 'Categories',
-    categories
-  });
+    res.render('categories', {
+      title: 'Categories',
+      categories
+    });
+  } catch (error) {
+    console.error('Error loading categories:', error);
+    res.status(500).send('Server Error');
+  }
 });
 
 // Server listener
