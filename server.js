@@ -1,4 +1,16 @@
 import express from 'express';
+import pool from './db/connection.js';
+import { getAllProjects } from './models/projects.js';
+import { getAllCategories } from './models/categories.js';
+
+// Test database connection (temporary)
+pool.query('SELECT NOW()')
+  .then(res => {
+    console.log('Database connected:', res.rows);
+  })
+  .catch(err => {
+    console.error('Database error:', err);
+  });
 
 // Define the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -15,7 +27,7 @@ app.set('views', './views');
 // Static files
 app.use(express.static('public'));
 
-// ✅ Dynamic year middleware (server-side)
+// Dynamic year middleware
 app.use((req, res, next) => {
   res.locals.year = new Date().getFullYear();
   next();
@@ -30,12 +42,22 @@ app.get('/organizations', (req, res) => {
   res.render('organizations', { title: 'Organizations' });
 });
 
-app.get('/projects', (req, res) => {
-  res.render('projects', { title: 'Projects' });
+app.get('/projects', async (req, res) => {
+  const projects = await getAllProjects();
+
+  res.render('projects', {
+    title: 'Projects',
+    projects
+  });
 });
 
-app.get('/categories', (req, res) => {
-  res.render('categories', { title: 'Categories' });
+app.get('/categories', async (req, res) => {
+  const categories = await getAllCategories();
+
+  res.render('categories', {
+    title: 'Categories',
+    categories
+  });
 });
 
 // Server listener
