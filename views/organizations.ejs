@@ -5,12 +5,29 @@
 <div class="org-container">
 
   <% organizations.forEach(org => { %>
+
     <div class="org-card">
-      <img src="<%= org.image %>" alt="<%= org.name %>" width="300">
-      <h2><%= org.name %></h2>
+
+      <img
+        src="<%= org.image %>"
+        alt="<%= org.name %>"
+        width="300"
+      >
+
+      <h2>
+        <a href="/organization/<%= org.id %>">
+          <%= org.name %>
+        </a>
+      </h2>
+
       <p><%= org.description %></p>
-      <p>Email: <%= org.contact_email %></p>
+
+      <p>
+        Email: <%= org.contact_email %>
+      </p>
+
     </div>
+
   <% }) %>
 
 </div>

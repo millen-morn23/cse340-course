@@ -1,0 +1,53 @@
+<%- include('partials/header') %>
+
+<h1><%= project.title %></h1>
+
+<div class="card">
+
+  <p>
+    <strong>Description:</strong>
+    <%= project.description %>
+  </p>
+
+  <p>
+    <strong>Date:</strong>
+    <%= new Date(project.project_date).toDateString() %>
+  </p>
+
+  <p>
+    <strong>Location:</strong>
+    <%= project.location %>
+  </p>
+
+  <p>
+    <strong>Organization:</strong>
+
+    <a href="/organization/<%= project.organization_id %>">
+      <%= project.organization_name %>
+    </a>
+  </p>
+
+  <p>
+    <strong>Categories:</strong>
+
+    <% if (categories.length > 0) { %>
+
+      <% categories.forEach(category => { %>
+
+        <a href="/category/<%= category.category_id %>">
+          <%= category.name %>
+        </a>
+
+      <% }) %>
+
+    <% } else { %>
+
+      No categories assigned.
+
+    <% } %>
+
+  </p>
+
+</div>
+
+<%- include('partials/footer') %>

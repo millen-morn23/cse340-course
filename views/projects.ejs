@@ -1,15 +1,37 @@
-<%- include('partials/header', { title: 'Projects' }) %>
+<%- include('partials/header', { title: title }) %>
 
-<h1>Service Projects</h1>
+<h1>Upcoming Service Projects</h1>
 
 <ul>
+
   <% projects.forEach(project => { %>
+
     <li>
-    <%= new Date(project.project_date).toDateString() %>
-      <%= project.title %>
-      (<%= project.organization_name %>)
+
+      <strong>
+        <a href="/project/<%= project.project_id %>">
+          <%= project.title %>
+        </a>
+      </strong>
+
+      <br>
+
+      <%= new Date(project.project_date).toDateString() %>
+
+      <br>
+
+      Organization:
+
+      <a href="/organization/<%= project.organization_id %>">
+        <%= project.organization_name %>
+      </a>
+
+      <br><br>
+
     </li>
+
   <% }) %>
+
 </ul>
 
 <%- include('partials/footer') %>
