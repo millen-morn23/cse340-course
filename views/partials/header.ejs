@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
+
   <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
 
 <nav class="navbar">
@@ -18,3 +20,23 @@
 </nav>
 
 <main class="container">
+
+  <% const messages = flash(); %>
+
+  <% Object.keys(messages).forEach(type => { %>
+
+    <% if (messages[type].length > 0) { %>
+
+      <div class="alert <%= type %>">
+
+        <% messages[type].forEach(msg => { %>
+
+          <p><%= msg %></p>
+
+        <% }) %>
+
+      </div>
+
+    <% } %>
+
+  <% }) %>
