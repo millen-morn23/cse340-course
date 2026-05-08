@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
 import express from 'express';
 import session from 'express-session';
 
@@ -45,6 +48,14 @@ app.use(session({
 
 // Use flash message middleware
 app.use(flash);
+
+// Make flash messages available globally
+app.use((req, res, next) => {
+
+  res.locals.messages = req.flash();
+
+  next();
+});
 
 // Middleware to log all incoming requests
 app.use((req, res, next) => {

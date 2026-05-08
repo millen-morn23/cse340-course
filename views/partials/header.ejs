@@ -21,7 +21,7 @@
 
 <main class="container">
 
-  <% const messages = flash(); %>
+  <% const messages = locals.messages || {}; %>
 
   <% Object.keys(messages).forEach(type => { %>
 
