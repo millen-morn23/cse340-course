@@ -20,10 +20,13 @@
         </a>
       </h2>
 
-      <p><%= org.description %></p>
+      <p>
+        <%= org.description %>
+      </p>
 
       <p>
-        Email: <%= org.contact_email %>
+        Email:
+        <%= org.contact_email %>
       </p>
 
     </div>
@@ -32,10 +35,17 @@
 
 </div>
 
-<p>
-  <a href="/new-organization">
-    Add a new organization
-  </a>
-</p>
+<% if (
+  user &&
+  user.role_name === 'admin'
+) { %>
+
+  <p>
+    <a href="/new-organization">
+      Add a new organization
+    </a>
+  </p>
+
+<% } %>
 
 <%- include('partials/footer') %>

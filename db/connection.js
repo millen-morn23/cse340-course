@@ -1,18 +1,24 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import pkg from 'pg';
+
 const { Pool } = pkg;
 
 let pool;
 
-// If DATABASE_URL exists → use Render DB
-if (process.env.DATABASE_URL) {
+if (process.env.DB_URL) {
+
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DB_URL,
+
     ssl: {
       rejectUnauthorized: false
     }
   });
+
 } else {
-  // Otherwise use local DB (no SSL)
+
   pool = new Pool({
     user: 'postgres',
     host: 'localhost',

@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<main>
+
+  <h1>
+    Dashboard
+  </h1>
+
+  <p>
+    Welcome,
+    <strong><%= name %></strong>
+  </p>
+
+  <p>
+    Your email:
+    <strong><%= email %></strong>
+  </p>
+
+  <% if (
+    user &&
+    user.role_name === 'admin'
+  ) { %>
+
+    <p>
+
+      <a href="/users">
+        View Registered Users
+      </a>
+
+    </p>
+
+  <% } %>
+
+</main>
+
+<%- include('partials/footer') %>

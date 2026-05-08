@@ -1,10 +1,27 @@
 <%- include('partials/header', { title: 'Home' }) %>
 
 <section class="card">
-  <h1>Welcome to Home Page</h1>
+
+  <h1>
+    Welcome to Home Page
+  </h1>
+
   <p>
-    This platform showcases organizations, service projects, and categories that make a difference in communities.
+    This platform showcases organizations,
+    service projects, and categories
+    that make a difference in communities.
   </p>
+
+  <% if (isLoggedIn) { %>
+
+    <p>
+      <a href="/dashboard">
+        My Dashboard
+      </a>
+    </p>
+
+  <% } %>
+
 </section>
 
 <%- include('partials/footer') %>

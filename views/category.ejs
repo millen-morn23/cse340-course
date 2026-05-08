@@ -1,18 +1,29 @@
 <%- include('partials/header') %>
 
-<h1><%= category.name %></h1>
+<h1>
+  <%= category.name %>
+</h1>
 
-<p>
+<% if (
+  user &&
+  user.role_name === 'admin'
+) { %>
 
-  <a
-    href="/edit-category/<%= category.category_id %>"
-  >
-    Edit Category
-  </a>
+  <p>
 
-</p>
+    <a
+      href="/edit-category/<%= category.category_id %>"
+    >
+      Edit Category
+    </a>
 
-<h2>Projects in this Category</h2>
+  </p>
+
+<% } %>
+
+<h2>
+  Projects in this Category
+</h2>
 
 <% if (projects.length > 0) { %>
 
@@ -26,7 +37,8 @@
           <%= project.title %>
         </a>
 
-        - <%= project.location %>
+        -
+        <%= project.location %>
 
       </li>
 
@@ -36,7 +48,9 @@
 
 <% } else { %>
 
-  <p>No projects found for this category.</p>
+  <p>
+    No projects found for this category.
+  </p>
 
 <% } %>
 

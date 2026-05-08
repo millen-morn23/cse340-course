@@ -1,14 +1,23 @@
 <%- include('partials/header', { title: title }) %>
 
-<h1>Upcoming Service Projects</h1>
+<h1>
+  Upcoming Service Projects
+</h1>
 
-<p>
+<% if (
+  user &&
+  user.role_name === 'admin'
+) { %>
 
-  <a href="/new-project">
-    Add New Service Project
-  </a>
+  <p>
 
-</p>
+    <a href="/new-project">
+      Add New Service Project
+    </a>
+
+  </p>
+
+<% } %>
 
 <ul>
 
@@ -24,7 +33,9 @@
 
       <br>
 
-      <%= new Date(project.project_date).toDateString() %>
+      <%= new Date(
+        project.project_date
+      ).toDateString() %>
 
       <br>
 
