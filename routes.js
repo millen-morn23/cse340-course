@@ -46,6 +46,11 @@ import {
   processLogout
 } from './controllers/users.js';
 
+import {
+  processVolunteer,
+  processRemoveVolunteer
+} from './controllers/volunteers.js';
+
 import { testErrorPage } from './controllers/errors.js';
 
 const router = express.Router();
@@ -129,6 +134,19 @@ router.post(
 router.get(
   '/project/:id',
   showProjectDetailsPage
+);
+
+// Volunteer routes
+router.post(
+  '/volunteer/:projectId',
+  requireLogin,
+  processVolunteer
+);
+
+router.post(
+  '/remove-volunteer/:projectId',
+  requireLogin,
+  processRemoveVolunteer
 );
 
 // Assign categories routes

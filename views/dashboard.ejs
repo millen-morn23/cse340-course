@@ -31,6 +31,65 @@
 
   <% } %>
 
+  <hr>
+
+  <h2>
+    My Volunteer Projects
+  </h2>
+
+  <% if (
+    volunteerProjects.length > 0
+  ) { %>
+
+    <ul>
+
+      <% volunteerProjects.forEach(project => { %>
+
+        <li>
+
+          <strong>
+
+            <a
+              href="/project/<%= project.project_id %>"
+            >
+              <%= project.title %>
+            </a>
+
+          </strong>
+
+          <br>
+
+          <%= project.location %>
+
+          <br>
+
+          <form
+            action="/remove-volunteer/<%= project.project_id %>"
+            method="POST"
+          >
+
+            <button type="submit">
+              Remove Volunteer Status
+            </button>
+
+          </form>
+
+          <br>
+
+        </li>
+
+      <% }) %>
+
+    </ul>
+
+  <% } else { %>
+
+    <p>
+      You have not volunteered for any projects yet.
+    </p>
+
+  <% } %>
+
 </main>
 
 <%- include('partials/footer') %>

@@ -6,6 +6,10 @@ import {
   authenticateUser
 } from "../models/users.js";
 
+import {
+  getVolunteerProjects
+} from "../models/volunteers.js";
+
 // Middleware to protect routes
 const requireLogin = (
   req,
@@ -184,21 +188,43 @@ const processLoginForm =
 };
 
 // Show dashboard
-const showDashboard = (
-  req,
-  res
-) => {
+const showDashboard =
+  async (req, res) => {
 
-  const {
-    name,
-    email
-  } = req.session.user;
+    const {
+      user_id,
+      name,
+      email
+    } = req.session.user;
 
-  res.render("dashboard", {
-    title: "Dashboard",
-    name,
-    email
-  });
+    try {
+
+      const volunteerProjects =
+        await getVolunteerProjects(
+          user_id
+        );
+
+      res.render("dashboard", {
+        title: "Dashboard",
+        name,
+        email,
+        volunteerProjects
+      });
+
+    } catch (error) {
+
+      console.error(
+        "Dashboard error:",
+        error
+      );
+
+      req.flash(
+        "error",
+        "Unable to load dashboard."
+      );
+
+      res.redirect("/");
+    }
 };
 
 // Show users page
